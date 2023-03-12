@@ -1,11 +1,9 @@
 extern crate std;
 use std::collections::HashMap;
 use std::f64;
-
 pub trait Node {
     fn eval(&self, env: &mut HashMap<String, f64>) -> Option<f64>;
 }
-
 pub struct Num {
     pub num: f64
 }
@@ -15,7 +13,6 @@ impl Node for Num {
         Some(self.num)
     }
 }
-
 pub struct Add {
     pub left: Box<dyn Node>,
     pub right: Box<dyn Node>,
@@ -34,7 +31,6 @@ impl Node for Add {
         }
     }
 }
-
 pub struct Sub {
     pub left: Box<dyn Node>,
     pub right: Box<dyn Node>,
@@ -72,7 +68,6 @@ impl Node for Mul {
         }
     }
 }
-
 pub struct Div {
     pub left: Box<dyn Node>,
     pub right: Box<dyn Node>,
@@ -110,7 +105,6 @@ impl Node for Mod {
         }
     }
 }
-
 pub struct Pow {
     pub base: Box<dyn Node>,
     pub exponent: Box<dyn Node>
@@ -154,7 +148,6 @@ impl Node for Cos {
         }
     }
 }
-
 pub struct Tan {
     pub arg: Box<dyn Node>
 }
@@ -188,7 +181,6 @@ fn factorial(number: f64) -> f64 {
         number * factorial(number - 1.0)
     }
 }
-
 pub struct Sqrt {
     pub arg: Box<dyn Node>
 }
@@ -200,7 +192,6 @@ impl Node for Sqrt {
         }
     }
 }
-
 pub struct Print {
     pub arg: Box<dyn Node>
 }
@@ -215,7 +206,6 @@ impl Node for Print {
         res
     }
 }
-
 pub struct Negate {
     pub arg: Box<dyn Node>
 }
@@ -230,7 +220,6 @@ impl Node for Negate {
         res
     }
 }
-
 pub struct Var {
     pub name: String
 }
@@ -243,7 +232,6 @@ impl Node for Var {
         }
     }
 }
-
 pub struct Assignment {
     pub name: String,
     pub value: Box<dyn Node>

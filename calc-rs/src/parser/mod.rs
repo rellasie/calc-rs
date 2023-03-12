@@ -33,14 +33,14 @@ impl Parser {
         loop {
             let curr = self.peek_token()?;
             if token::is_eof(&curr) {
-                //println!("breaking out of expr loop");
                 break;
             }
-            // if lhs.as_ref().eval(env)
+
             let info_tuple = curr.info();
             if info_tuple.is_none() {
                 break;
             }
+
             let (op_prec, op_assoc) = info_tuple.unwrap();
             if op_prec < prec {
                 break;
@@ -74,7 +74,6 @@ impl Parser {
                 Ok(Box::new( ast::Num { num: val }))
             }
             SYMBOL(val) => {
-                //only allow math functions for now, no variables
                 self.next_token()?;
                 match self.peek_token()? {       
                     LPAREN => {
@@ -110,10 +109,10 @@ impl Parser {
                                 self.next_token()?;
                                 Ok(Box::new( ast::Num { num: -val }))
                             }
-                            _ => Err(format!("unrecognized atom: {:?}", a))
+                            _ => Err(format!("Unrecognized atom: {:?}", a))
                         }
                     },
-                    _ => Err(format!("unrecognized atom: {:?}", a))
+                    _ => Err(format!("Unrecognized atom: {:?}", a))
                 }
             }
         }
@@ -202,7 +201,7 @@ impl Parser {
                 })
             }
             _ => {
-                panic!("unrecognized function!");
+                panic!("Unrecognized function");
             }
         }
     }
@@ -212,7 +211,7 @@ impl Parser {
     pub fn expect(&mut self, tok: char) -> Result<(), String> {
         self.next_token()?;
         if self.current.to_char() != tok {
-            return Err(format!("expected {:?} but found {}", tok, self.current.to_char()));
+            return Err(format!("Expected {:?} but found {}", tok, self.current.to_char()));
         }
         Ok(())
     }

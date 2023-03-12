@@ -303,7 +303,7 @@ impl Application for CalculatorGUI {
     }
 
     fn view(&self) -> Element<Message> {
-        let title = text("Simple Calculator")
+        let title = text("Calculator")
         .width(Length::Fill)
         .size(25)
         .horizontal_alignment(alignment::Horizontal::Center);
@@ -473,7 +473,7 @@ impl Calculator {
         let ast = p.parse()?;
         match ast.eval(env) {
             Some(result) => Ok(result),
-            None => Err("No value for that expression!".to_string())
+            None => Err("No value for expression".to_string())
         }
     }
     

@@ -18,7 +18,6 @@ pub enum Token {
 }
 
 impl Token {
-    /* returns (prec, associativity) where 0 is left and 1 is right*/
     pub fn info(&self) -> Option<(usize, usize)> {
         match *self {
             ADD | SUB => Some((10, 0)),
